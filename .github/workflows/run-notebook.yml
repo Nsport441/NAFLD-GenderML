@@ -1,0 +1,29 @@
+name: Execute Notebook
+
+on:
+  push:
+    paths:
+      - '**.ipynb'
+      - 'data/**'
+      - '.github/workflows/**'
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy matplotlib seaborn scikit-learn openpyxl notebook nbconvert
+
+      - name: Run notebook and export as HTML
+        run: |
+          jupyter nbconvert --to html --execute 81new.ipynb --output executed_81new.html
