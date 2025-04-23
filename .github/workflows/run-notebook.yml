@@ -27,3 +27,8 @@ jobs:
       - name: Run notebook and export as HTML
         run: |
           jupyter nbconvert --to html --execute 81new.ipynb --output executed_81new.html
+      - name: Upload executed notebook HTML as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: executed-notebook-html
+          path: executed_81new.html
